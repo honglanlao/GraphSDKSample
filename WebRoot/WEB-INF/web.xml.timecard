@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>GraphSDKSample</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>ApiVersion</param-name>
+		<param-value>1.0</param-value>
+	</context-param>
+	<context-param>
+		<param-name>TenantContextId</param-name>
+		<param-value>2f8b426e-e53f-4353-b255-e70ca20bbde0</param-value>
+	</context-param>
+	<context-param>
+		<param-name>TenantDomainName</param-name>
+		<param-value>timecardsample.ccsctp.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ProtectedResourcePrincipalId</param-name>
+		<param-value>00000002-0000-0000-c000-000000000000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ProtectedResourceHostName</param-name>
+		<param-value>graph.ppe.windows.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>RestServiceHost</param-name>
+		<param-value>graph.ppe.windows.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>AppPrincipalId</param-name>
+		<param-value>6015c885-f649-46e1-a06e-2383d1dc91b5</param-value>
+	 <!--   	<param-value>3524af07-20ee-4065-8d8d-d46ed429fe12</param-value>   -->
+	<!-- 	<param-value>b5f44361-110a-47b6-ae03-37641f74d11a</param-value>-->
+	</context-param>
+	<context-param>
+		<param-name>StsUrl</param-name>
+		<param-value>https://accounts.accesscontrol.windows-ppe.net/tokens/OAuth/2</param-value>
+	</context-param>
+	<context-param>
+		<param-name>SymmetricKey</param-name>
+		<param-value>V1LJ5KdDe6jANAKla7mgjVxIHW8Nacy0/JM1A2IQ368=</param-value>
+		
+	<!--   <param-value>hRymqPMaNblQvPkuMzt0cQyJsWKiKx2d4MPM4GeifBQ=</param-value> 	-->
+	<!--	<param-value>rc+FzeIczYA52ONwKwcjVUySOiTTyc/9dmCGVOTENvA=</param-value>  -->
+	<!-- 	<param-value>Zv/GTzxDEoH1AdgJpNA6pMj00goH3NUCEwsXEAxxLkk=</param-value>-->
+	</context-param>
+	<context-param>
+		<param-name>AcsPrincipalId</param-name>
+		<param-value>00000001-0001-0000-c000-000000000000</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>User</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.UserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>User</servlet-name>
+		<url-pattern>/User</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Group</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.GroupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Group</servlet-name>
+		<url-pattern>/Group</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Home</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/Home</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Role</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.RoleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Role</servlet-name>
+		<url-pattern>/Role</url-pattern>
+	</servlet-mapping>
+</web-app>

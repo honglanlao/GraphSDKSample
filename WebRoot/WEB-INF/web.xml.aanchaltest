@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>GraphSDKSample</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>ApiVersion</param-name>
+		<param-value>1.0</param-value>
+	</context-param>
+	<context-param>
+		<param-name>TenantContextId</param-name>
+		<param-value>58706934-19b0-4090-836b-fbec405a1166</param-value>
+	</context-param>
+	<context-param>
+		<param-name>TenantDomainName</param-name>
+		<param-value>aanchaltest.ccsctp.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ProtectedResourcePrincipalId</param-name>
+		<param-value>00000002-0000-0000-c000-000000000000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ProtectedResourceHostName</param-name>
+		<param-value>graph.ppe.windows.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>RestServiceHost</param-name>
+		<param-value>graph.ppe.windows.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>AppPrincipalId</param-name>
+		<param-value>c241014a-3f6a-4abe-90e0-e251dd3fd748</param-value>
+	</context-param>
+	<context-param>
+		<param-name>StsUrl</param-name>
+		<param-value>https://accounts.accesscontrol.windows-ppe.net/tokens/OAuth/2</param-value>
+	</context-param>
+	<context-param>
+		<param-name>SymmetricKey</param-name>
+		<param-value>itryimCqdo7n59uS3EtXbsa3tNSBB8Onow1ODEBmMLo=</param-value>
+	</context-param>
+	<context-param>
+		<param-name>AcsPrincipalId</param-name>
+		<param-value>00000001-0001-0000-c000-000000000000</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>User</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.UserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>User</servlet-name>
+		<url-pattern>/User</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Group</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.GroupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Group</servlet-name>
+		<url-pattern>/Group</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Home</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/Home</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Role</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.sampleapp.controllers.RoleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Role</servlet-name>
+		<url-pattern>/Role</url-pattern>
+	</servlet-mapping>
+</web-app>

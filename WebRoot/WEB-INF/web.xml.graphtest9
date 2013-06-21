@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>GraphSDKSample</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <servlet>
+      <servlet-name>User</servlet-name>
+      <servlet-class>com.microsoft.aad.sampleapp.controllers.UserServlet</servlet-class>
+      <init-param>
+          <param-name>ApiVersion</param-name>
+          <param-value>0.8</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantContextId</param-name>
+          <param-value>943c5491-aa44-4e9e-ba4a-5fae46da662a </param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantDomainName</param-name>
+          <param-value>GraphTest9.onMicrosoft.com</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourcePrincipalId</param-name>
+          <param-value>00000002-0000-0000-c000-000000000000</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourceHostName</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+            
+      <init-param>
+          <param-name>RestServiceHost</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>AppPrincipalId</param-name>
+          <param-value>aaee9743-b77d-42ba-a052-f5a9cfcd86d9</param-value>  
+ 
+      </init-param>
+      
+      <init-param>
+          <param-name>StsUrl</param-name>
+          <param-value>https://accounts.accesscontrol.windows.net/tokens/OAuth/2</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>SymmetricKey</param-name>
+          <param-value>0n7P/zNumVAJ/XICmlEaMMHM96VyhbH3G66BIFyFu7k=</param-value> 
+          
+      </init-param>
+      
+      <init-param>
+          <param-name>AcsPrincipalId</param-name>
+          <param-value>00000001-0000-0000-c000-000000000000</param-value>
+      </init-param>
+            
+  </servlet>
+ 
+  <servlet>
+      <servlet-name>Group</servlet-name>
+      <servlet-class>com.microsoft.aad.sampleapp.controllers.GroupServlet</servlet-class>
+      <init-param>
+          <param-name>ApiVersion</param-name>
+          <param-value>0.8</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantContextId</param-name>
+          <param-value>943c5491-aa44-4e9e-ba4a-5fae46da662a </param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantDomainName</param-name>
+          <param-value>GraphTest9.onMicrosoft.com</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourcePrincipalId</param-name>
+          <param-value>00000002-0000-0000-c000-000000000000</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourceHostName</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+            
+      <init-param>
+          <param-name>RestServiceHost</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>AppPrincipalId</param-name>
+          <param-value>aaee9743-b77d-42ba-a052-f5a9cfcd86d9</param-value>  
+ 
+      </init-param>
+      
+      <init-param>
+          <param-name>StsUrl</param-name>
+          <param-value>https://accounts.accesscontrol.windows.net/tokens/OAuth/2</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>SymmetricKey</param-name>
+          <param-value>0n7P/zNumVAJ/XICmlEaMMHM96VyhbH3G66BIFyFu7k=</param-value> 
+          
+      </init-param>
+      
+      <init-param>
+          <param-name>AcsPrincipalId</param-name>
+          <param-value>00000001-0000-0000-c000-000000000000</param-value>
+      </init-param>
+            
+  </servlet>
+  
+  <servlet>
+      <servlet-name>Home</servlet-name>
+      <servlet-class>com.microsoft.aad.sampleapp.controllers.HomeServlet</servlet-class>
+      <init-param>
+          <param-name>ApiVersion</param-name>
+          <param-value>0.8</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantContextId</param-name>
+          <param-value>943c5491-aa44-4e9e-ba4a-5fae46da662a</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantDomainName</param-name>
+          <param-value>GraphTest9.onMicrosoft.com</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourcePrincipalId</param-name>
+          <param-value>00000002-0000-0000-c000-000000000000</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourceHostName</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+            
+      <init-param>
+          <param-name>RestServiceHost</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>AppPrincipalId</param-name>
+          <param-value>aaee9743-b77d-42ba-a052-f5a9cfcd86d9</param-value>  
+ 
+      </init-param>
+      
+      <init-param>
+          <param-name>StsUrl</param-name>
+          <param-value>https://accounts.accesscontrol.windows.net/tokens/OAuth/2</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>SymmetricKey</param-name>
+          <param-value>0n7P/zNumVAJ/XICmlEaMMHM96VyhbH3G66BIFyFu7k=</param-value> 
+          
+      </init-param>
+      
+      <init-param>
+          <param-name>AcsPrincipalId</param-name>
+          <param-value>00000001-0000-0000-c000-000000000000</param-value>
+      </init-param>          
+  </servlet>
+  
+  <servlet>
+      <servlet-name>Role</servlet-name>
+      <servlet-class>com.microsoft.aad.sampleapp.controllers.RoleServlet</servlet-class>
+      <init-param>
+          <param-name>ApiVersion</param-name>
+          <param-value>0.8</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantContextId</param-name>
+          <param-value>943c5491-aa44-4e9e-ba4a-5fae46da662a</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>TenantDomainName</param-name>
+          <param-value>GraphTest9.onMicrosoft.com</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourcePrincipalId</param-name>
+          <param-value>00000002-0000-0000-c000-000000000000</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>ProtectedResourceHostName</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+            
+      <init-param>
+          <param-name>RestServiceHost</param-name>
+          <param-value>graph.windows.net</param-value>
+      </init-param>
+
+      <init-param>
+          <param-name>AppPrincipalId</param-name>
+          <param-value>aaee9743-b77d-42ba-a052-f5a9cfcd86d9</param-value>  
+ 
+      </init-param>
+      
+      <init-param>
+          <param-name>StsUrl</param-name>
+          <param-value>https://accounts.accesscontrol.windows.net/tokens/OAuth/2</param-value>
+      </init-param>
+      
+      <init-param>
+          <param-name>SymmetricKey</param-name>
+          <param-value>0n7P/zNumVAJ/XICmlEaMMHM96VyhbH3G66BIFyFu7k=</param-value> 
+          
+      </init-param>
+      
+      <init-param>
+          <param-name>AcsPrincipalId</param-name>
+          <param-value>00000001-0000-0000-c000-000000000000</param-value>
+      </init-param>          
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>User</servlet-name>
+      <url-pattern>/User</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+      <servlet-name>Group</servlet-name>
+      <url-pattern>/Group</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+      <servlet-name>Home</servlet-name>
+      <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+      <servlet-name>Role</servlet-name>
+      <url-pattern>/Role</url-pattern>
+  </servlet-mapping>
+
+</web-app>

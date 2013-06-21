@@ -1,0 +1,43 @@
+body {
+    background: none repeat scroll 0 0 #EEEEEE;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 0.7em;
+    margin: 0;
+}
+fieldset {
+    padding: 0 15px 10px;
+}
+h1 {
+    color: #FFFFFF;
+    font-size: 2.4em;
+    margin: 0;
+}
+h2 {
+    color: #CC0000;
+    font-size: 1.7em;
+    margin: 0;
+}
+h3 {
+    color: #000000;
+    font-size: 1.2em;
+    margin: 10px 0 0;
+}
+#header {
+    background-color: #555555;
+    color: #FFFFFF;
+    font-family: "trebuchet MS",Verdana,sans-serif;
+    margin: 0;
+    padding: 6px 2%;
+    width: 96%;
+}
+#content {
+    margin: 0 0 0 2%;
+    position: relative;
+}
+.content-container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin-top: 8px;
+    padding: 10px;
+    position: relative;
+    width: 96%;
+}

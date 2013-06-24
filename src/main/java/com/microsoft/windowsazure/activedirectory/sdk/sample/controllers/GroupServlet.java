@@ -16,7 +16,6 @@ import com.microsoft.windowsazure.activedirectory.sdk.graph.config.SdkConfig;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.config.TenantConfiguration;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.exceptions.SdkException;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.JSONHelper;
-import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.ServletHelper;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.models.Group;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.models.GroupList;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.models.User;

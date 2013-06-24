@@ -51,7 +51,7 @@ public class UserServlet extends HttpServlet {
 	public void init() throws ServletException {
 
 	//	ServletHelper.loadConfig(this.getServletConfig());
-		PropertyConfigurator.configure(getServletContext().getRealPath("/") + "/../src/main/resource/log4j.properties");
+	//	PropertyConfigurator.configure(getServletContext().getRealPath("/") + "/../src/main/resource/log4j.properties");
 	}
 
 

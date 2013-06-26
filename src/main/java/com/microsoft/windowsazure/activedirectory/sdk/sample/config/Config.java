@@ -3,18 +3,19 @@ package com.microsoft.windowsazure.activedirectory.sdk.sample.config;
 
 
 /**
- * The class SampleConfig holds the important parameters for this application.
+ * The class Config holds the important parameters for this application.
  * The parameters are read in from the web.xml configuration file in the
  * {@link com.microsoft.windowsazure.activedirectory.sdk.sample.controllers.GroupServlet#init() init} method. These parameters 
  * are used throughout the application.
  * @author Azure Active Directory Contributor
  */
 
-public class SampleConfig {
+public class Config {
 	
 	// The number of users shown per page.
 	public static int userSizePerList = 9;
 	
+	public static String tenantPropertiesPath = "/tenant.properties";
 	// Access token received from the ACS.
 //	private static String accessToken = null;
 //	
@@ -259,7 +260,7 @@ public class SampleConfig {
 //	 * @param userSizePerList the userSizePerList to set
 //	 */
 //	public static void setUserSizePerList(int userSizePerList) {
-//		SampleConfig.userSizePerList = userSizePerList;
+//		Config.userSizePerList = userSizePerList;
 //	}
 ////	
 //	/**
@@ -273,7 +274,7 @@ public class SampleConfig {
 //	 * @param accessToken the accessToken to set
 //	 */
 //	public static void setAccessToken(String accessToken) {
-//		SampleConfig.accessToken = accessToken;
+//		Config.accessToken = accessToken;
 //	}
 //	
 //	/**
@@ -288,7 +289,7 @@ public class SampleConfig {
 //	 * @param apiVersion the apiVersion to set
 //	 */
 //	public static void setApiVersion(String apiVersion) {
-//		SampleConfig.apiVersion = apiVersion;
+//		Config.apiVersion = apiVersion;
 //	}
 //	
 //	/**
@@ -302,7 +303,7 @@ public class SampleConfig {
 //	 * @param tenantDomainName the tenantDomainName to set
 //	 */
 //	public static void setTenantDomainName(String tenantDomainName) {
-//		SampleConfig.tenantDomainName = tenantDomainName;
+//		Config.tenantDomainName = tenantDomainName;
 //	}
 //	
 //	/**
@@ -316,7 +317,7 @@ public class SampleConfig {
 //	 * @param restServiceHost the restServiceHost to set
 //	 */
 //	public static void setRestServiceHost(String restServiceHost) {
-//		SampleConfig.restServiceHost = restServiceHost;
+//		Config.restServiceHost = restServiceHost;
 //	}
 //	
 //	/**
@@ -331,7 +332,7 @@ public class SampleConfig {
 //	 */
 //	public static void setProtectedResourceHostName(
 //			String protectedResourceHostName) {
-//		SampleConfig.protectedResourceHostName = protectedResourceHostName;
+//		Config.protectedResourceHostName = protectedResourceHostName;
 //	}
 //	
 //	/**
@@ -345,7 +346,7 @@ public class SampleConfig {
 //	 * @param appPrincipalId the appPrincipalId to set
 //	 */
 //	public static void setAppPrincipalId(String appPrincipalId) {
-//		SampleConfig.appPrincipalId = appPrincipalId;
+//		Config.appPrincipalId = appPrincipalId;
 //	}
 //	
 //	/**
@@ -359,7 +360,7 @@ public class SampleConfig {
 //	 * @param acsPrincipalId the acsPrincipalId to set
 //	 */
 //	public static void setAcsPrincipalId(String acsPrincipalId) {
-//		SampleConfig.acsPrincipalId = acsPrincipalId;
+//		Config.acsPrincipalId = acsPrincipalId;
 //	}
 //	
 //	/**
@@ -373,7 +374,7 @@ public class SampleConfig {
 //	 * @param symmetricKey the symmetricKey to set
 //	 */
 //	public static void setSymmetricKey(String symmetricKey) {
-//		SampleConfig.symmetricKey = symmetricKey;
+//		Config.symmetricKey = symmetricKey;
 //	}
 //	
 //	/**
@@ -387,7 +388,7 @@ public class SampleConfig {
 //	 * @param password
 //	 */
 //	public static void setPassword(String password){
-//		SampleConfig.password = password;
+//		Config.password = password;
 //	}
 //	
 //	/**
@@ -401,7 +402,7 @@ public class SampleConfig {
 //	 * @param tenantContextId the tenantContextId to set
 //	 */
 //	public static void setTenantContextId(String tenantContextId) {
-//		SampleConfig.tenantContextId = tenantContextId;
+//		Config.tenantContextId = tenantContextId;
 //	}
 //	
 //	/**
@@ -415,7 +416,7 @@ public class SampleConfig {
 //	 * @param stsUrl the stsUrl to set
 //	 */
 //	public static void setStsUrl(String stsUrl) {
-//		SampleConfig.stsUrl = stsUrl;
+//		Config.stsUrl = stsUrl;
 //	}
 //	
 //	/**
@@ -429,7 +430,7 @@ public class SampleConfig {
 //	 * @param acsUrl
 //	 */
 //	public static void setAcsUrl(String acsUrl) {
-//		SampleConfig.acsUrl = acsUrl;
+//		Config.acsUrl = acsUrl;
 //	}
 //	
 //	
@@ -444,7 +445,7 @@ public class SampleConfig {
 //	 * @param protectedResourcePrincipalId the protectedResourcePrincipalId to set
 //	 */
 //	public static void setProtectedResourcePrincipalId(String protectedResourcePrincipalId) {
-//		SampleConfig.protectedResourcePrincipalId = protectedResourcePrincipalId;
+//		Config.protectedResourcePrincipalId = protectedResourcePrincipalId;
 //	}
 	
 	

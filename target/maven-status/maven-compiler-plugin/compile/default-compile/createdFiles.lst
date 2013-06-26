@@ -1,0 +1,5 @@
+com\microsoft\windowsazure\activedirectory\sdk\sample\controllers\UserServlet.class
+com\microsoft\windowsazure\activedirectory\sdk\sample\controllers\GroupServlet.class
+com\microsoft\windowsazure\activedirectory\sdk\sample\config\Config.class
+com\microsoft\windowsazure\activedirectory\sdk\sample\controllers\RoleServlet.class
+com\microsoft\windowsazure\activedirectory\sdk\sample\controllers\HomeServlet.class

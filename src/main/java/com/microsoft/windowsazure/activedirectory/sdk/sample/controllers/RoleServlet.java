@@ -19,9 +19,10 @@ import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.ServletHelper
 import com.microsoft.windowsazure.activedirectory.sdk.graph.models.Role;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.models.RoleList;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.services.CommonService;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.services.GroupService;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.services.UserService;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.token.TokenGenerator;
-import com.microsoft.windowsazure.activedirectory.sdk.sample.config.SampleConfig;
+import com.microsoft.windowsazure.activedirectory.sdk.sample.config.Config;
 
 /**
  * This servlet works as the controller of this web application. All the role
@@ -34,6 +35,10 @@ import com.microsoft.windowsazure.activedirectory.sdk.sample.config.SampleConfig
 public class RoleServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private static final TenantConfiguration CONFIG = TenantConfiguration.getInstance(Config.tenantPropertiesPath);
+	private static final TenantConfiguration tenant = TenantConfiguration.getInstance(Config.tenantPropertiesPath);
+	private CommonService commonService = new CommonService(tenant);
+	private UserService userService = new UserService(tenant);
 	private Logger logger  = Logger.getLogger(RoleServlet.class);
 
 	public RoleServlet() {
@@ -68,7 +73,7 @@ public class RoleServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 
 		// Receive the operation from the Request Object.
 		String action = request.getParameter("op");
@@ -82,10 +87,10 @@ public class RoleServlet extends HttpServlet {
 						String userObjectId = request.getParameter("objectId");
 						
 						String skiptoken = request.getParameter("skiptoken");
-						allRolesList =  (RoleList)CommonService.getDirectoryObjectList(RoleList.class, Role.class, false, skiptoken); // Role does not support paging
+						allRolesList =  (RoleList)commonService.getDirectoryObjectList(RoleList.class, Role.class, false, skiptoken); // Role does not support paging
 						
 					//	allRolesList = RoleService.getRoleList();
-						RoleList userRolesList = UserService.getRolesForUser(userObjectId);
+						RoleList userRolesList = userService.getRolesForUser(userObjectId);
 						logger.info("userRolesList ->" + userRolesList);
 						request.getSession().setAttribute("AllRolesList", allRolesList);
 						request.getSession().setAttribute("UserRolesList", userRolesList);
@@ -148,7 +153,7 @@ public class RoleServlet extends HttpServlet {
 						
 					case SdkConfig.MessageIdExpired:
 					// Try to generate a new Access Token and try again.
-					TenantConfiguration.setAccessToken(TenantConfiguration.getAccessToken());
+						CONFIG.setAccessToken(CONFIG.getAccessToken());
 
 					retryRemaining--;
 					break;
@@ -184,7 +189,7 @@ public class RoleServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 
 		// Retrieve the operation requested.		
 		String op = request.getParameter("op");		
@@ -201,10 +206,10 @@ public class RoleServlet extends HttpServlet {
 				    userDisplayName = request.getParameter("userDisplayName");
 				    
 				    String[] rolesToAdd = request.getParameterValues("addRoles");
-				    JSONArray addRolesFeedBack = CommonService.addDirectoryObjectsToMemberOf(userObjectId, rolesToAdd, this.getServletName());
+				    JSONArray addRolesFeedBack = commonService.addDirectoryObjectsToMemberOf(userObjectId, rolesToAdd, this.getServletName());
 				    
 					String[] rolesToRemove = request.getParameterValues("removeRoles");
-				    JSONArray removeRolesFeedBack = CommonService.removeDirectoryObjectsFromMemberOf(userObjectId, rolesToRemove, this.getServletName());
+				    JSONArray removeRolesFeedBack = commonService.removeDirectoryObjectsFromMemberOf(userObjectId, rolesToRemove, this.getServletName());
 				   
 				    JSONArray comb = JSONHelper.joinJSONArrays(addRolesFeedBack, removeRolesFeedBack);
 					request.getSession().setAttribute("feedBack", comb);

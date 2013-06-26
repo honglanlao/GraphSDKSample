@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.microsoft.windowsazure.activedirectory.sdk.graph.config.SdkConfig;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.ServletHelper;
-import com.microsoft.windowsazure.activedirectory.sdk.sample.config.SampleConfig;
+import com.microsoft.windowsazure.activedirectory.sdk.sample.config.Config;
 
 /**
  * This servlet works as the Home controller of this web application. All the user
@@ -49,7 +49,7 @@ public class HomeServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 		
 		// Receive the operation from the Request Object.
 		String action = request.getParameter("op");

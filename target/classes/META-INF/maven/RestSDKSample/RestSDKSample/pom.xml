@@ -38,7 +38,7 @@
 			<version>2.2.2</version>
 		</dependency>
 			<dependency>
-			<groupId>WindowsAzure-ActiveDirectory-SDK-Graph</groupId>
+			<groupId>com.microsoft.windowsazure.activedirectory.sdk.graph</groupId>
 			<artifactId>WindowsAzure-ActiveDirectory-SDK-Graph</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

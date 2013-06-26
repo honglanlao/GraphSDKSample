@@ -22,7 +22,8 @@ import com.microsoft.windowsazure.activedirectory.sdk.graph.models.User;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.models.UserList;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.services.CommonService;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.services.GroupService;
-import com.microsoft.windowsazure.activedirectory.sdk.sample.config.SampleConfig;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.services.UserService;
+import com.microsoft.windowsazure.activedirectory.sdk.sample.config.Config;
 
 /**
  * This servlet works as the group controller of this web application. All the group
@@ -35,7 +36,10 @@ import com.microsoft.windowsazure.activedirectory.sdk.sample.config.SampleConfig
 public class GroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GroupList groupList = null;
-	
+	private static final TenantConfiguration CONFIG = TenantConfiguration.getInstance(Config.tenantPropertiesPath);
+	private static final TenantConfiguration tenant = TenantConfiguration.getInstance(Config.tenantPropertiesPath);
+	private CommonService commonService = new CommonService(tenant);
+	private GroupService groupService = new GroupService(tenant);
 	private Logger logger  = Logger.getLogger(GroupServlet.class);	
 
 	
@@ -50,7 +54,7 @@ public class GroupServlet extends HttpServlet {
 	public void init() throws ServletException {
 		
 	//	ServletHelper.loadConfig(this.getServletConfig());
-		PropertyConfigurator.configure(getServletContext().getRealPath("/") + "/../src/main/resource/log4j.properties");
+	//	PropertyConfigurator.configure(getServletContext().getRealPath("/") + "/../src/main/resource/log4j.properties");
 
 	}
 
@@ -67,7 +71,7 @@ public class GroupServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 
 		// Receive the operation from the Request Object.
 		String reqReceived = request.getParameter("op");
@@ -84,7 +88,7 @@ public class GroupServlet extends HttpServlet {
 				// Put the returned page into the session object and redirect user to the showUserPage view.
 				case "getMultiGroups":				
 					String skiptoken = request.getParameter("skiptoken");
-					groupList = (GroupList)CommonService.getDirectoryObjectList(GroupList.class, Group.class, true, skiptoken);
+					groupList = (GroupList)commonService.getDirectoryObjectList(GroupList.class, Group.class, true, skiptoken);
 					GroupServlet.groupList = groupList;	
 					request.getSession().setAttribute("groupList", groupList);
 					request.getSession().setAttribute("servletName", servletName);
@@ -100,7 +104,7 @@ public class GroupServlet extends HttpServlet {
 				case "getSingleGroup":
 					String objectId = request.getParameter("objectId");
 					index = Integer.parseInt(request.getParameter("index").toString());
-					Group group = (Group)CommonService.getSingleDirectoryObject(Group.class, objectId);
+					Group group = (Group)commonService.getSingleDirectoryObject(Group.class, objectId);
 					request.getSession().setAttribute("group", group);
 					request.getSession().setAttribute("index", index);
 					response.sendRedirect("getSingleGroupView.jsp");
@@ -112,8 +116,8 @@ public class GroupServlet extends HttpServlet {
 				case "getUsersForGroup":
 					String groupDisplayName = request.getParameter("displayName");
 					String groupObjectId = request.getParameter("objectId");
-					UserList usersAll = (UserList)CommonService.getDirectoryObjectList(UserList.class, User.class, false, null);
-					usersInGroup= GroupService.getUsersForGroup(groupObjectId);
+					UserList usersAll = (UserList)commonService.getDirectoryObjectList(UserList.class, User.class, false, null);
+					usersInGroup= groupService.getUsersForGroup(groupObjectId);
 					request.getSession().setAttribute("usersInGroup", usersInGroup);
 					request.getSession().setAttribute("usersAll", usersAll);
 					request.getSession().setAttribute("displayName",  groupDisplayName);
@@ -122,7 +126,7 @@ public class GroupServlet extends HttpServlet {
 					return;
 
 				case "queryGroup":
-					groupList = GroupService.queryGroups(
+					groupList = groupService.queryGroups(
 							request.getParameter("attributeName"),
 							request.getParameter("opName"),
 							request.getParameter("searchString"));
@@ -141,7 +145,7 @@ public class GroupServlet extends HttpServlet {
 					
 				// The request for creating Group page.	
 				case "getCreateGroupView":
-					request.getSession().setAttribute("TenantDomainName", TenantConfiguration.getTenantDomainName());
+					request.getSession().setAttribute("TenantDomainName", CONFIG.getTenantDomainName());
 					response.sendRedirect("getCreateGroupView.jsp");
 					return;
 
@@ -215,7 +219,7 @@ public class GroupServlet extends HttpServlet {
 //								TenantConfiguration.getSymmetricKey(),
 //								TenantConfiguration.getProtectedResourcePrincipalId(),
 //								TenantConfiguration.getProtectedResourceHostName()));
-					TenantConfiguration.setAccessToken(TenantConfiguration.getAccessToken());
+					CONFIG.setAccessToken(CONFIG.getAccessToken());
 					
 					retryRemaining--;
 					break;
@@ -250,7 +254,7 @@ public class GroupServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 		
 		// Retrieve the operation requested.
 		String op = request.getParameter("op");
@@ -265,7 +269,7 @@ public class GroupServlet extends HttpServlet {
 					// If createUser request is received.
 					case "createGroup":		
 						servletName = this.getServletName();
-						feedBack = CommonService.createDirectoryObject(request, servletName);
+						feedBack = commonService.createDirectoryObject(request, servletName);
 						request.getSession().setAttribute("servletName", servletName);
 						request.getSession().setAttribute("feedBack", feedBack);
 						request.getSession().setAttribute("displayName", request.getParameter("displayName"));
@@ -276,7 +280,7 @@ public class GroupServlet extends HttpServlet {
 					case "deleteGroup":
 						// If the request is successfully carried out, send a success message to the user.
 						servletName = this.getServletName();
-						feedBack = CommonService.deleteDirectoryObject(request, servletName);
+						feedBack = commonService.deleteDirectoryObject(request, servletName);
 						request.getSession().setAttribute("servletName", servletName);
 						request.getSession().setAttribute("feedBack", feedBack);
 						request.getSession().setAttribute("displayName", request.getParameter("displayName"));
@@ -286,7 +290,7 @@ public class GroupServlet extends HttpServlet {
 					// If the request is update Group.				
 					case "updateGroup":
 						servletName = this.getServletName();
-						feedBack = CommonService.updateDirectoryObject(request.getParameter("objectId"), request, servletName);
+						feedBack = commonService.updateDirectoryObject(request.getParameter("objectId"), request, servletName);
 						request.getSession().setAttribute("servletName", servletName);
 						request.getSession().setAttribute("feedBack", feedBack);
 						request.getSession().setAttribute("oldDisplayName", request.getParameter("oldDisplayName"));
@@ -299,9 +303,9 @@ public class GroupServlet extends HttpServlet {
 					    groupObjectId = request.getParameter("groupObjectId");
 					    groupDisplayName = request.getParameter("groupDisplayName");
 					    String[] usersToAdd = request.getParameterValues("addUsers");
-					    JSONArray addRolesFeedBack = CommonService.addDirectoryObjectsToMemberOf(usersToAdd, groupObjectId, this.getServletName());
+					    JSONArray addRolesFeedBack = commonService.addDirectoryObjectsToMemberOf(usersToAdd, groupObjectId, this.getServletName());
 						String[] usersToRemove = request.getParameterValues("removeUsers");
-					    JSONArray removeRolesFeedBack = CommonService.removeDirectoryObjectsFromMemberOf(usersToRemove, groupObjectId, this.getServletName());
+					    JSONArray removeRolesFeedBack = commonService.removeDirectoryObjectsFromMemberOf(usersToRemove, groupObjectId, this.getServletName());
 
 					    JSONArray comb = JSONHelper.joinJSONArrays(addRolesFeedBack, removeRolesFeedBack);
 						request.getSession().setAttribute("feedBack", comb);

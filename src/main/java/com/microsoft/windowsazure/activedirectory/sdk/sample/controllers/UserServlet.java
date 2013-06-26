@@ -21,7 +21,7 @@ import com.microsoft.windowsazure.activedirectory.sdk.graph.models.UserList;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.services.CommonService;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.services.UserService;
 import com.microsoft.windowsazure.activedirectory.sdk.graph.token.TokenGenerator;
-import com.microsoft.windowsazure.activedirectory.sdk.sample.config.SampleConfig;
+import com.microsoft.windowsazure.activedirectory.sdk.sample.config.Config;
 
  /**
   * This servlet works as the User controller of this web application. All the user
@@ -35,6 +35,9 @@ public class UserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static UserList userList = null;
+	private static final TenantConfiguration tenant = TenantConfiguration.getInstance(Config.tenantPropertiesPath);
+	private CommonService commonService = new CommonService(tenant);
+	private UserService userService = new UserService(tenant);
 	
 	private Logger logger  = Logger.getLogger(UserServlet.class);	
 	
@@ -66,7 +69,7 @@ public class UserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 
 		// Receive the operation from the Request Object.
 		String action = request.getParameter("op");
@@ -81,7 +84,7 @@ public class UserServlet extends HttpServlet {
 					// get all users, could be filtered by $top=
 					case "getMultiUsers":
 						String skiptoken = request.getParameter("skiptoken");
-						userList =  (UserList)CommonService.getDirectoryObjectList(UserList.class, User.class, true, skiptoken);
+						userList =  (UserList)commonService.getDirectoryObjectList(UserList.class, User.class, true, skiptoken);
 					//	logger.info(userList);
 						UserServlet.userList = userList;	
 						request.getSession().setAttribute("userList", userList);
@@ -98,7 +101,7 @@ public class UserServlet extends HttpServlet {
 					// get only one user request. Comes with the parameter objectId
 					case "getSingleUser":
 						index = Integer.parseInt(request.getParameter("index").toString());
-						User user = (User)CommonService.getSingleDirectoryObject(User.class, request.getParameter("objectId"));
+						User user = (User)commonService.getSingleDirectoryObject(User.class, request.getParameter("objectId"));
 						request.getSession().setAttribute("user", user);
 						request.getSession().setAttribute("index", index);
 						response.sendRedirect("getSingleUserView.jsp");
@@ -106,7 +109,7 @@ public class UserServlet extends HttpServlet {
 					
 					case "getThumbnail":
 						response.setContentType("image/jpg");
-						byte[] imageInByte = UserService.getThumbnail(request.getParameter("objectId"));
+						byte[] imageInByte = userService.getThumbnail(request.getParameter("objectId"));
 						OutputStream os = response.getOutputStream();
 						os.write(imageInByte, 0, imageInByte.length);						
 						return;
@@ -115,7 +118,7 @@ public class UserServlet extends HttpServlet {
 					//	For example, if attributeName = DisplayName, operator=eq and searchString="John Doe", then an user x
 					// would be in the resultset if and only if the condition "x.DisplayName eq 'John Doe'" holds.
 					case "queryUser":
-						userList = UserService.queryUsers(
+						userList = userService.queryUsers(
 								request.getParameter("attributeName"),
 								request.getParameter("opName"),
 								request.getParameter("searchString"));
@@ -135,7 +138,7 @@ public class UserServlet extends HttpServlet {
 						
 					// The request for creating user.	
 					case "getCreateUserView":
-						request.getSession().setAttribute("TenantDomainName", TenantConfiguration.getTenantDomainName());
+						request.getSession().setAttribute("TenantDomainName", tenant.getTenantDomainName());
 						response.sendRedirect("getCreateUserView.jsp");
 						return;
 					
@@ -198,7 +201,7 @@ public class UserServlet extends HttpServlet {
 					case SdkConfig.MessageIdUnauthorized:
 					case SdkConfig.MessageIdExpired:
 						// Try to generate a new Access Token and try again.
-						TenantConfiguration.setAccessToken(TenantConfiguration.getAccessToken());
+						tenant.setAccessToken(tenant.getAccessToken());
 						retryRemaining--;
 						break;
 
@@ -235,7 +238,7 @@ public class UserServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		
-		int retryRemaining = SampleConfig.MAX_RETRY_ATTEMPTS;
+		int retryRemaining = Config.MAX_RETRY_ATTEMPTS;
 
 		// Retrieve the operation requested.		
 		String op = request.getParameter("op");
@@ -250,7 +253,7 @@ public class UserServlet extends HttpServlet {
 					// If the request is successfully carried out, send a success message to the user.
 					servletName = this.getServletName();
 					request.setAttribute("UserPrincipalName", request.getAttribute("emailAlias") + "@" + request.getAttribute("selectedDomain"));
-					feedBack = CommonService.createDirectoryObject(request, servletName);
+					feedBack = commonService.createDirectoryObject(request, servletName);
 					request.getSession().setAttribute("servletName", servletName);
 					request.getSession().setAttribute("feedBack", feedBack);
 					request.getSession().setAttribute("displayName", request.getParameter("displayName"));
@@ -260,7 +263,7 @@ public class UserServlet extends HttpServlet {
 				case "deleteUser":
 					// If the request is successfully carried out, send a success message to the user.
 					servletName = this.getServletName();
-					feedBack = CommonService.deleteDirectoryObject(request, servletName);
+					feedBack = commonService.deleteDirectoryObject(request, servletName);
 					request.getSession().setAttribute("servletName", servletName);
 					request.getSession().setAttribute("feedBack", feedBack);
 					request.getSession().setAttribute("displayName", request.getParameter("displayName"));
@@ -270,7 +273,7 @@ public class UserServlet extends HttpServlet {
 				// If the request is update User.
 				case "updateUser":
 					servletName = this.getServletName();
-					feedBack = CommonService.updateDirectoryObject(request.getParameter("objectId"), request, this.getServletName());
+					feedBack = commonService.updateDirectoryObject(request.getParameter("objectId"), request, this.getServletName());
 					request.getSession().setAttribute("servletName", servletName);
 					request.getSession().setAttribute("feedBack", feedBack);
 					request.getSession().setAttribute("oldDisplayName", request.getParameter("oldDisplayName"));
